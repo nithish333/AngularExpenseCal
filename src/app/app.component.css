@@ -1,0 +1,19 @@
+.formsDiv{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    
+}
+.expenseListItems{
+    display: flex;
+    margin-top: 45px;
+
+}
+.expenseListItems p{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.expensesList{
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
