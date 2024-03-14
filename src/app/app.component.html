@@ -1,30 +1,10 @@
-<div style="width: 100%; display: flex;flex-direction: column;align-items: center;">
+<div style="display: flex;" class="nav">
   <div>
-    <h1>
-      Expense calculator
-    </h1>
-    <div >
-      <form class="formsDiv" (ngSubmit)="onAdd(f)" #f="ngForm">
-      <input type="text" placeholder="Enter expense name" required ngModel name="name"/>
-      <input type="number" placeholder="Enter amount" required ngModel name="amount"/>
-      <button type="submit" *ngIf="selectedIndex==-1" [disabled]="!f.valid">Add</button>
-      <br/>
-      <div *ngIf="selectedIndex!=-1">
-      <button (click)="updateExpense()">Update</button>
-        <button (click)="cancelExpense()">Cancel</button>
-    </div>
-    </form>
-    </div>
-    <div class="expensesList" *ngIf="expenses.length>0">
-      <div *ngFor="let expense of expenses;let i=index" class="expenseListItems">
-        <p>{{i+1}}</p>
-        <p>{{expense.name}}</p>
-        <p>{{expense.amount}}</p>
-        <button (click)="editExpense(i)">Edit</button>
-        <button (click)="removeExpense(i)">Remove</button>
-      </div>
-    </div>
-
-    <p *ngIf="selectedIndex">Total - {{calculateTotal()}}</p>
+    <h4>EXPENSE CALCULATOR</h4>
   </div>
-  </div>
+  <div class="naLinks">
+  <li><a routerLink="calculator">Calculator</a></li>
+  <li><a routerLink="login">Login</a></li>
+</div>
+</div>
+<router-outlet></router-outlet>

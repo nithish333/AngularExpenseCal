@@ -1,0 +1,18 @@
+<div class="formPage">
+    <h2>{{isLogin?'Login':'Register'}}</h2>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="form">
+        <label>Email</label><br/>
+        <input type="text" placeholder="Enter your email" ngModel name="email" required email /><br/>
+        <label>Password</label><br/>
+        <input type="text" placeholder="Enter your password" ngModel name="password" required /><br/>
+        <div>
+        <button type="submit" [disabled]="!f.valid" 
+        [ngClass]="f.valid?'btn enabled-btn':'btn disabled-btn'">
+        {{isLogin?'Login':'Register'}}
+    </button>
+        <p style="text-align: center;
+        margin: 10px 0;">or</p>
+        <button type="button" (click)="toggleLogin()" class="btn enabled-btn"> {{isLogin?'Switch to SignUp':'Switch to Login'}}</button>
+    </div>
+    </form>
+</div>  
