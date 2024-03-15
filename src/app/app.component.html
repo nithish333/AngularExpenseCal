@@ -1,5 +1,6 @@
 <div style="display: flex;" class="nav">
   <div>
+<<<<<<< HEAD
     <h4>EXPENSE CALCULATOR</h4>
   </div>
   <div class="naLinks">
@@ -8,3 +9,33 @@
 </div>
 </div>
 <router-outlet></router-outlet>
+=======
+    <h1>
+      Expense calculator
+    </h1>
+    <div >
+      <form class="formsDiv" (ngSubmit)="onAdd(f)" #f="ngForm">
+      <input type="text" placeholder="Enter expense name" required ngModel name="name"/>
+      <input type="number" placeholder="Enter amount" required ngModel name="amount"/>
+      <button type="submit" *ngIf="selectedIndex==-1" [disabled]="!f.valid">Add</button>
+      <br/>
+      <div *ngIf="selectedIndex!=-1">
+      <button (click)="updateExpense()">Update</button>
+        <button (click)="cancelExpense()">Cancel</button>
+    </div>
+    </form>
+    </div>
+    <div class="expensesList" *ngIf="expenses.length>0">
+      <div *ngFor="let expense of expenses;let i=index" class="expenseListItems">
+        <p>{{i+1}}</p>
+        <p>{{expense.name}}</p>
+        <p>{{expense.amount}}</p>
+        <button (click)="editExpense(i)">Edit</button>
+        <button (click)="removeExpense(i)">Remove</button>
+      </div>
+    </div>
+
+    <p *ngIf="expenses.length>0">Total - {{calculateTotal()}}</p>
+  </div>
+  </div>
+>>>>>>> ba3a307affcab4d56989e140db2db649dc50e684
