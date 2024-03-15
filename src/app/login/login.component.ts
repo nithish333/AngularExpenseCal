@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthResponse, AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,27 @@ export class LoginComponent {
 
   @ViewChild('f') formData? : NgForm;
   isLogin = true;
+  errorOccured?:string;
+   authObs?:Observable<AuthResponse>;
 constructor(private authService:AuthService){}
   toggleLogin(){
     this.isLogin=!this.isLogin
   }
 onSubmit(f:NgForm){
   // console.log(this.formData?.value);
-this.authService.signupUser(f.value.email,f.value.password)
-.subscribe(response=>console.log(response)
+  if(this.isLogin){
+    this.authObs=this.authService.loginUser(f.value.email,f.value.password)
+  }else{
+    
+this.authObs=this.authService.signupUser(f.value.email,f.value.password)
+  }
+
+this.authObs.subscribe(response=>{
+  console.log(response)
+},err=>{
+  // console.log(err.error.error.message);
+  alert(err.error.error.message)
+}
 )
   this.formData?.reset()
 }

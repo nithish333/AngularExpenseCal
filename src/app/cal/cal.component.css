@@ -1,19 +1,47 @@
 .formsDiv{
-    width: 50%;
+    /* width: 50%; */
     display: flex;
     justify-content: center;
-    
-}
-.expenseListItems{
-    display: flex;
-    margin-top: 45px;
-
-}
-.expenseListItems p{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 30px;
+    align-items: center;
+    padding-bottom: 30px;
 }
 .expensesList{
     padding-bottom: 20px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #222;
 }
+.formsDiv input{
+    height:45px;
+    width: 200px;
+    margin-right: 20px;
+    outline: none;
+    padding: 0 10px;
+    border: 2px solid #222;
+    border-radius: 4px;
+}
+.fbtn{
+    color: #fff;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.expenseTable{
+    border-collapse: collapse;
+    width: 100%;
+}
+.expenseTable td,th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    
+    
+}
+.expenseTable th,td{
+    text-align: left;
+}
+.expenseTable th{
+    background-color: #222;
+    color: white;
+}
+

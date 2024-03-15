@@ -1,30 +1,46 @@
 <div style="width: 100%; display: flex;flex-direction: column;align-items: center;">
     <div>
-      <h1>
+      <h1 style="margin-top: 40px;">
         Expense calculator
       </h1>
       <div >
         <form class="formsDiv" (ngSubmit)="onAdd(f)" #f="ngForm">
         <input type="text" placeholder="Enter expense name" required ngModel name="name"/>
         <input type="number" placeholder="Enter amount" required ngModel name="amount"/>
-        <button type="submit" *ngIf="selectedIndex==-1" [disabled]="!f.valid">Add</button>
+        <button type="submit" class="btn enabled-btn" *ngIf="selectedIndex==-1"  [disabled]="!f.valid">Add</button>
         <br/>
-        <div *ngIf="selectedIndex!=-1">
-        <button (click)="updateExpense()">Update</button>
-          <button (click)="cancelExpense()">Cancel</button>
-      </div>
+       
       </form>
+      <div *ngIf="selectedIndex!=-1" style="display: flex; gap: 15px; margin-bottom: 20px;">
+        <button class="btn enabled-btn" (click)="updateExpense()">Update</button>
+          <button class="btn cancel-btn" (click)="cancelExpense()">Cancel</button>
+      </div>
       </div>
       <p *ngIf="expenses.length<1 && !isFetching">No expenses</p>
         <p *ngIf="isFetching">Loading...</p>
       <div class="expensesList" *ngIf="expenses.length>0 && !isFetching">
-        <div *ngFor="let expense of expenses;let i=index" class="expenseListItems">
-          <p>{{i+1}}</p>
-          <p>{{expense.name}}</p>
-          <p>{{expense.amount}}</p>
-          <button (click)="editExpense(i)">Edit</button>
-          <button (click)="removeExpense(i,expense.id)">Remove</button>
-        </div>
+        <table class="expenseTable">
+          
+          <tbody>
+            <tr>
+              <th>S.No</th>
+              <th>Expense</th>
+              <th>Amount</th>
+              <th>Actions</th> <!-- Added action column -->
+            </tr>
+            <tr *ngFor="let expense of expenses; let i=index" class="expenseListItems">
+              <td>{{ i + 1 }}</td>
+              <td>{{ expense.name }}</td>
+              <td>{{ expense.amount }}</td>
+              <td>
+                <button class="fbtn enabled-btn" (click)="editExpense(i,expense.id)">Edit</button>
+                <button class="fbtn danger-btn" (click)="removeExpense(i, expense.id)">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        
       </div>
   
       <p *ngIf="expenses.length>0">Total - {{calculateTotal()}}</p>

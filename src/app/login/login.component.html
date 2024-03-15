@@ -4,7 +4,7 @@
         <label>Email</label><br/>
         <input type="text" placeholder="Enter your email" ngModel name="email" required email /><br/>
         <label>Password</label><br/>
-        <input type="text" placeholder="Enter your password" ngModel name="password" required /><br/>
+        <input type="password" placeholder="Enter your password" ngModel name="password" required /><br/>
         <div>
         <button type="submit" [disabled]="!f.valid" 
         [ngClass]="f.valid?'btn enabled-btn':'btn disabled-btn'">

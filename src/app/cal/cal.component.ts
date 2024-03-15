@@ -18,6 +18,7 @@ export class CalComponent {
   constructor(private http:HttpClient){}
   ngOnInit(){
     this.fetchExpensesList()
+  
   }
   onAdd(formData:NgForm){
     // console.log(formData);
@@ -29,7 +30,7 @@ this.http.post('https://angularex-17c02-default-rtdb.firebaseio.com/posts.json',
     // console.log(this.expenses);
     
   }
-  editExpense(i:number){
+  editExpense(i:number,id:string){
     this.selectedIndex=i;
     this.selectedItem = this.expenses[i]
     // console.log(this.selectedIndex);
@@ -41,13 +42,18 @@ this.http.post('https://angularex-17c02-default-rtdb.firebaseio.com/posts.json',
 
 
   updateExpense(){
-    // this.epxenseForm[this.selectedIndex].name=
-    // console.log(this.selectedIndex);
     this.expenses[this.selectedIndex].name=this.epxenseForm.value.name
     this.expenses[this.selectedIndex].amount=this.epxenseForm.value.amount
     this.epxenseForm.reset();
-    this.selectedIndex=-1;
-    
+    this.selectedIndex=this.epxenseForm.value.id;
+    this.http.patch(`https://angularex-17c02-default-rtdb.firebaseio.com/posts/${this.selectedIndex}.json`,
+    {'name':this.selectedItem.name,
+    'amount':this.selectedItem.amount,
+    'id':this.selectedIndex
+  })
+    .subscribe(response=>console.log(response)
+    )
+    this.cancelExpense()
   }
   cancelExpense(){
     this.selectedIndex=-1;
@@ -85,6 +91,8 @@ this.http.post('https://angularex-17c02-default-rtdb.firebaseio.com/posts.json',
         expensesArray.push({...response[key],id:key})
         }
       }
+      console.log(expensesArray);
+      
       return expensesArray
     }
     ))
